@@ -7,10 +7,22 @@
 
 #include <windows.h>
 
-HWND GetWindowHandleByName(LPCSTR name);
+// --- WINDOW HANDLE ---
+HWND GetWindowHandleByTitle(LPCSTR window_title);
+HWND GetWindowHandleByClass(LPCSTR class_name);
+
+// --- PROCESS ID ---
 DWORD GetProcessIdFromWindowHandle(HWND wHandle);
-DWORD GetProcessIdByName(LPCSTR name);
-HANDLE GetProcessHandleByName(LPCSTR name, DWORD desired_access);
+DWORD GetProcessIdByTitle(LPCSTR window_title);
+DWORD GetProcessIdByClass(LPCSTR class_name);
+
+// --- PROCESS HANDLE ---
+HANDLE GetProcessHandleByTitle(LPCSTR window_title, DWORD desired_access);
+HANDLE GetProcessHandleByClass(LPCSTR class_name, DWORD desired_access);
+
+// --- READ ---
 int ReadInt(HANDLE pHandle, LPCVOID address);
+
+// --- WRITE ---
 
 #endif //MEMORIA_MEMORIA_H

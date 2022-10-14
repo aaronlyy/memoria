@@ -8,11 +8,18 @@ This Project is work in progress and in a very early stage of development.
 
 ## Available functions
 
-- HWND GetWindowHandleByName(LPCSTR name);
-- DWORD GetProcessIdFromWindowHandle(HWND wHandle);
-- DWORD GetProcessIdByName(LPCSTR name);
-- HANDLE GetProcessHandleByName(LPCSTR name, DWORD desired_access);
-- int ReadInt(HANDLE pHandle, LPCVOID address);
+- WINDOW HANDLE
+  - HWND GetWindowHandleByClass(LPCSTR class_name);
+  - HWND GetWindowHandleByTitle(LPCSTR window_title);
+- PROCESS ID
+  - DWORD GetProcessIdFromWindowHandle(HWND wHandle);
+  - DWORD GetProcessIdByClass(LPCSTR class_name);
+  - DWORD GetProcessIdByTitle(LPCSTR window_title);
+- PROCESS HANDLE
+  - HANDLE GetProcessHandleByClass(LPCSTR class_name, DWORD desired_access);
+  - HANDLE GetProcessHandleByTitle(LPCSTR window_title, DWORD desired_access);
+- READ
+  - int ReadInt(HANDLE pHandle, LPCVOID address);
 
 ## Example
 

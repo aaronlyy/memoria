@@ -3,7 +3,7 @@
 #include <unistd.h>
 
 int main() {
-    HANDLE pHandle = GetProcessHandleByName("AssaultCube", PROCESS_ALL_ACCESS);
+    HANDLE pHandle = GetProcessHandleByClass("SDL_app", PROCESS_ALL_ACCESS);
 
     int health;
 
