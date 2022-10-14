@@ -29,8 +29,12 @@ uintptr_t GetModuleBaseAddress(TCHAR* modName, DWORD procId);
 
 // --- READ ---
 int ReadInt(HANDLE pHandle, LPCVOID address);
+double ReadDouble(HANDLE pHandle, LPCVOID address);
+float ReadFloat(HANDLE pHandle, LPCVOID address);
 
 // --- WRITE ---
 void WriteInt(HANDLE pHandle, LPVOID address, int value);
+void WriteDouble(HANDLE pHandle, LPVOID address, double value);
+void WriteFloat(HANDLE pHandle, LPVOID address, float value);
 
 #endif //MEMORIA_MEMORIA_H

@@ -73,7 +73,27 @@ int ReadInt(HANDLE pHandle, LPCVOID address) {
     return buffer;
 }
 
+double ReadDouble(HANDLE pHandle, LPCVOID address) {
+    double buffer;
+    ReadProcessMemory(pHandle, address, &buffer, sizeof(double), nullptr);
+    return buffer;
+}
+
+float ReadFloat(HANDLE pHandle, LPCVOID address) {
+    float buffer;
+    ReadProcessMemory(pHandle, address, &buffer, sizeof(float), nullptr);
+    return buffer;
+}
+
 // --- WRITE ---
 void WriteInt(HANDLE pHandle, LPVOID address, int value) {
     WriteProcessMemory(pHandle, address, &value, sizeof(int), nullptr);
+}
+
+void WriteDouble(HANDLE pHandle, LPVOID address, double value) {
+    WriteProcessMemory(pHandle, address, &value, sizeof(double), nullptr);
+}
+
+void WriteFloat(HANDLE pHandle, LPVOID address, float value) {
+    WriteProcessMemory(pHandle, address, &value, sizeof(float), nullptr);
 }
