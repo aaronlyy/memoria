@@ -1,4 +1,10 @@
-# memoria: Read and Write process memory on Windows
+<p align="center"><img src="./media/brain.png"/></p>
+<h1 align=center> Memoria: Read and Write Process Memory on Windows</h1>
+
+## Info
+Memoria offers various functions and methods that will make your life easier while working with process memory on windows.
+
+This Project is work in progress and in a very early stage of development.
 
 ## Available functions
 
