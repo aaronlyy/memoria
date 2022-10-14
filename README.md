@@ -20,6 +20,8 @@ This Project is work in progress and in a very early stage of development.
   - HANDLE GetProcessHandleByTitle(LPCSTR window_title, DWORD desired_access);
 - READ
   - int ReadInt(HANDLE pHandle, LPCVOID address);
+- WRITE
+  - void WriteInt(HANDLE pHandle, LPVOID address, int value);
 
 ## Example
 
