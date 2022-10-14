@@ -16,6 +16,6 @@ int main() {
         else {
             std::cout << "Dead?\n";
         }
-        sleep(1);
+        sleep(1); // test
     }
 }
