@@ -24,5 +24,6 @@ HANDLE GetProcessHandleByClass(LPCSTR class_name, DWORD desired_access);
 int ReadInt(HANDLE pHandle, LPCVOID address);
 
 // --- WRITE ---
+void WriteInt(HANDLE pHandle, LPVOID address, int value);
 
 #endif //MEMORIA_MEMORIA_H

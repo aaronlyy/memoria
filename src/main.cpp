@@ -16,6 +16,7 @@ int main() {
         else {
             std::cout << "Dead?\n";
         }
+        WriteInt(pHandle, (LPVOID)0x0070ADEC, 100);
         sleep(1);
     }
 }

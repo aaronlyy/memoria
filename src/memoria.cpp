@@ -39,9 +39,12 @@ HANDLE GetProcessHandleByClass(LPCSTR class_name, DWORD desired_access) {
 
 // --- READ ---
 int ReadInt(HANDLE pHandle, LPCVOID address) {
-    int value;
-    ReadProcessMemory(pHandle, address, &value, sizeof(int), 0);
-    return value;
+    int buffer;
+    ReadProcessMemory(pHandle, address, &buffer, sizeof(int), nullptr);
+    return buffer;
 }
 
 // --- WRITE ---
+void WriteInt(HANDLE pHandle, LPVOID address, int value) {
+    WriteProcessMemory(pHandle, address, &value, sizeof(int), nullptr);
+}
