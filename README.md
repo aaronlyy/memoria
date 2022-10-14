@@ -52,9 +52,6 @@ int main() {
 
 ## ToDo
 
-- GetWindowHandleByClass
-- GetProcessHandleByClass
-- GetProcessIdByClass
 - GetModuleBaseAddressByName
 - GetModuleByName
 
