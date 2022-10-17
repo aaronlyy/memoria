@@ -5,14 +5,16 @@
 
 
 #include <iostream>
+#include <math.h>
 #include "memoria.h"
+
 
 int main() {
 
     uintptr_t off_health = 0xEC;
     uintptr_t off_x = 0x04;
-    uintptr_t off_y = 0x0C;
-    uintptr_t off_z = 0x08;
+    uintptr_t off_y = 0x08;
+    uintptr_t off_z = 0x0C;
     uintptr_t off_yaw = 0x34;
     uintptr_t off_pitch = 0x38;
     uintptr_t off_current_height = 0x50;
@@ -29,7 +31,6 @@ int main() {
     uintptr_t add_playerent = ac_client + 0x18AC00;
     uintptr_t playerent = ReadInt(pHandle, (LPCVOID)add_playerent);
 
-
     // calculate all addresses
     uintptr_t add_yaw = playerent + off_yaw;
     uintptr_t add_pitch = playerent + off_pitch;
@@ -38,49 +39,56 @@ int main() {
     uintptr_t add_y = playerent + off_y;
     uintptr_t add_z = playerent + off_z;
 
-    int health, direction, shots;
-    double x, y, z, height, curr_height, yaw, pitch;
+    int health;
+    float x, y, z;
 
-    // main loop
+    float saved_x = 0;
+    float saved_y = 0;
+    float saved_z = 0;
+
+    std::cout << "### Memoria Example Code using Assault Cube ###\n";
+
+    std::cout << "\n[General information]\n";
+
+    std::cout << "[Base Address]: "<< std::hex << ac_client << "\n";
+    std::cout << "[Player]: " << std::hex << playerent << "\n";
+
+    std::cout << "\n[Hotkeys]\n";
+    std::cout << "[NUMPAD0] -> Set HP to 100\n";
+    std::cout << "[NUMPAD1] -> Save current position\n";
+    std::cout << "[NUMPAD2] -> Aim at saved position\n";
+    std::cout << "[NUMPAD9] -> Exit\n";
+
     while (true) {
 
-        if (GetAsyncKeyState(VK_NUMPAD0)) {
-            WriteInt(pHandle, (LPVOID)add_health, 100);
-        }
-        if (GetAsyncKeyState(VK_NUMPAD9)) {
-            break;
-        }
-
-
         health = ReadInt(pHandle, (LPCVOID)add_health);
-        yaw = ReadFloat(pHandle, (LPCVOID)add_yaw);
-        pitch = ReadFloat(pHandle, (LPCVOID)add_pitch);
         x = ReadFloat(pHandle, (LPCVOID)add_x);
         y = ReadFloat(pHandle, (LPCVOID)add_y);
         z = ReadFloat(pHandle, (LPCVOID)add_z);
 
-        std::cout << "### Memoria Example Code using Assault Cube ###\n";
+        if (GetAsyncKeyState(VK_NUMPAD0)) {
+            WriteInt(pHandle, (LPVOID)add_health, 100);
+        }
 
-        std::cout << "\n[General information]\n";
+        if (GetAsyncKeyState(VK_NUMPAD9)) {
+            break;
+        }
 
-        std::cout << "[Base Address]: "<< std::hex << ac_client << "\n";
-        std::cout << "[Player]: " << std::hex << playerent << "\n";
+        if (GetAsyncKeyState(VK_NUMPAD1)) {
+            saved_x = x;
+            saved_y = y;
+            saved_z = z;
+        }
 
-        std::cout << "\n[Game information]\n";
+        if (GetAsyncKeyState(VK_NUMPAD2)) {
+            double new_pitch = calculatePitchToPosition(x, y, z, saved_x, saved_y, saved_z);
+            double new_yaw = calculateYawToPosition(x, y, saved_x, saved_y);
+            WriteFloat(pHandle, (LPVOID)add_pitch, (float)new_pitch);
+            WriteFloat(pHandle, (LPVOID)add_yaw, (float)new_yaw );
+        }
 
-        std::cout << "[Health] " << std::dec << health << "\n";
-        std::cout << "[X]: " << std::dec << x << ", [Z]: " << std::dec << z << ", [Y]: " << std::dec << y << "\n";
-        // std::cout << "Height: " << std::dec << health << "\n";
-        // std::cout << "Current Height: " << std::dec << health << "\n";
-        // std::cout << "Direction: " << std::dec << health << "\n";
-        // std::cout << "Shots fired: " << std::dec << health << "\n";
-        std::cout << "[Yaw]: " << std::dec << yaw << ", [Pitch]: " << std::dec << pitch << "\n";
-
-        std::cout << "\n[Hotkeys]\n";
-        std::cout << "[NUMPAD0] -> Set HP to 100\n";
-        std::cout << "[NUMPAD9] -> Exit\n";
-
-        sleep(1);
-        system("cls");
+        if (health < 50) {
+            WriteInt(pHandle, (LPVOID)add_health, 100);
+        }
     }
 }
