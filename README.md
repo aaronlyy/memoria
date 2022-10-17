@@ -28,6 +28,10 @@ This Project is work in progress and in a very early stage of development.
   - void WriteInt(HANDLE pHandle, LPVOID address, int value);
   - void WriteDouble(HANDLE pHandle, LPVOID address, double value);
   - void WriteFloat(HANDLE pHandle, LPVOID address, float value);
+- MATH
+  - double calculateDistance(float x1, float y1, float x2, float y2);
+  - double calculateYawToPosition(float x1, float y1, float x2, float y2);
+  - double calculatePitchToPosition(float x1, float y1, float z1, float x2, float y2, float z2);
 
 ## Showcase
 
