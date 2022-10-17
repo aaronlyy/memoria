@@ -105,7 +105,7 @@ void WriteFloat(HANDLE pHandle, LPVOID address, float value) {
 
 // --- MATH ---
 double calculateDistance(float x1, float y1, float x2, float y2) {
-    return std::sqrt(std::pow(x2 - x1, 2) + std::pow(y1 - y2, 2));
+    return sqrt(pow(x2 - x1, 2) + pow(y1 - y2, 2));
 }
 
 double calculateYawToPosition(float x1, float y1, float x2, float y2) {
