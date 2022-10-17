@@ -24,38 +24,63 @@ int main() {
     char module_name[] = "client.dll"; // ac_client.exe also works?
     uintptr_t ac_client = GetModuleBaseAddress(_T(module_name), GetProcessIdByClass("SDL_app"));
     HANDLE pHandle = GetProcessHandleByClass("SDL_app", PROCESS_ALL_ACCESS);
-    std::cout << "Base Address: "<< std::hex << ac_client << "\n";
 
     // add playerent offset to base and read value at address
     uintptr_t add_playerent = ac_client + 0x18AC00;
-    std::cout << "Base + Playerent Offset: " << std::hex << add_playerent << "\n";
     uintptr_t playerent = ReadInt(pHandle, (LPCVOID)add_playerent);
-    std::cout << "Playerent: " << std::hex << playerent << "\n";
+
 
     // calculate all addresses
     uintptr_t add_yaw = playerent + off_yaw;
     uintptr_t add_pitch = playerent + off_pitch;
     uintptr_t add_health = playerent + off_health;
+    uintptr_t add_x = playerent + off_x;
+    uintptr_t add_y = playerent + off_y;
+    uintptr_t add_z = playerent + off_z;
 
     int health, direction, shots;
     double x, y, z, height, curr_height, yaw, pitch;
 
     // main loop
     while (true) {
+
+        if (GetAsyncKeyState(VK_NUMPAD0)) {
+            WriteInt(pHandle, (LPVOID)add_health, 100);
+        }
+        if (GetAsyncKeyState(VK_NUMPAD9)) {
+            break;
+        }
+
+
         health = ReadInt(pHandle, (LPCVOID)add_health);
         yaw = ReadFloat(pHandle, (LPCVOID)add_yaw);
         pitch = ReadFloat(pHandle, (LPCVOID)add_pitch);
+        x = ReadFloat(pHandle, (LPCVOID)add_x);
+        y = ReadFloat(pHandle, (LPCVOID)add_y);
+        z = ReadFloat(pHandle, (LPCVOID)add_z);
 
-        std::cout << "Health: " << std::dec << health << "\n";
-        // std::cout << "X: " << std::dec << health << "\n";
-        // std::cout << "Y: " << std::dec << health << "\n";
-        // std::cout << "Z: " << std::dec << health << "\n";
+        std::cout << "### Memoria Example Code using Assault Cube ###\n";
+
+        std::cout << "\n[General information]\n";
+
+        std::cout << "[Base Address]: "<< std::hex << ac_client << "\n";
+        std::cout << "[Player]: " << std::hex << playerent << "\n";
+
+        std::cout << "\n[Game information]\n";
+
+        std::cout << "[Health] " << std::dec << health << "\n";
+        std::cout << "[X]: " << std::dec << x << ", [Z]: " << std::dec << z << ", [Y]: " << std::dec << y << "\n";
         // std::cout << "Height: " << std::dec << health << "\n";
         // std::cout << "Current Height: " << std::dec << health << "\n";
         // std::cout << "Direction: " << std::dec << health << "\n";
         // std::cout << "Shots fired: " << std::dec << health << "\n";
-        std::cout << "Yaw: " << std::dec << yaw << "\n";
-        std::cout << "Pitch: " << std::dec << pitch << "\n";
+        std::cout << "[Yaw]: " << std::dec << yaw << ", [Pitch]: " << std::dec << pitch << "\n";
+
+        std::cout << "\n[Hotkeys]\n";
+        std::cout << "[NUMPAD0] -> Set HP to 100\n";
+        std::cout << "[NUMPAD9] -> Exit\n";
+
         sleep(1);
+        system("cls");
     }
 }
