@@ -31,7 +31,7 @@ This Project is work in progress and in a very early stage of development.
 
 ## Showcase
 
-[![yaw & pitch calculation test](https://img.youtube.com/vi/YhmHOjOGIBI/0.jpg)](https://www.youtube.com/watch?v=YYhmHOjOGIBI)
+[![yaw & pitch calculation test](https://img.youtube.com/vi/YhmHOjOGIBI/0.jpg)](https://www.youtube.com/watch?v=YhmHOjOGIBI)
 
 ## ToDo
 
