@@ -1,3 +1,9 @@
+/**
+ * Usage example of memoria.h using the FPS Assault Cube
+ * Last offset update: 17.10.2022
+ */
+
+
 #include <iostream>
 #include "memoria.h"
 

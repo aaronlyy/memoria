@@ -1,26 +1,36 @@
-//
-// Created by aaronlyy on 14.10.2022.
-//
-
 #ifndef MEMORIA_MEMORIA_H
 #define MEMORIA_MEMORIA_H
 
 #include <windows.h>
-#include<TlHelp32.h>
+#include <TlHelp32.h>
 #include <tchar.h>
 #include <cstdint>
 #include <unistd.h>
 
 // --- WINDOW HANDLE ---
+/**
+ * Get a Window handle using the window title.
+ *
+ * @param window_title Title of a window
+ * @return HWND window_handle
+ */
 HWND GetWindowHandleByTitle(LPCSTR window_title);
+
+/**
+ * Get a Window handle using the class name.
+ *
+ * @param class_name Name of a class
+ * @return HWND window_handle
+ */
 HWND GetWindowHandleByClass(LPCSTR class_name);
 
 // --- PROCESS ID ---
-DWORD GetProcessIdFromWindowHandle(HWND wHandle);
+DWORD GetProcessIdFromWindowHandle(HWND window_handle);
 DWORD GetProcessIdByTitle(LPCSTR window_title);
 DWORD GetProcessIdByClass(LPCSTR class_name);
 
 // --- PROCESS HANDLE ---
+HANDLE GetProcessHandleByProcessId(DWORD process_id, DWORD desired_access);
 HANDLE GetProcessHandleByTitle(LPCSTR window_title, DWORD desired_access);
 HANDLE GetProcessHandleByClass(LPCSTR class_name, DWORD desired_access);
 

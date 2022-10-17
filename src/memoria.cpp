@@ -2,20 +2,20 @@
 
 // --- WINDOW HANDLE ---
 HWND GetWindowHandleByTitle(LPCSTR window_title) {
-    HWND wHandle = FindWindowA(nullptr, window_title);
-    return wHandle;
+    HWND window_handle = FindWindowA(nullptr, window_title);
+    return window_handle;
 }
 
 HWND GetWindowHandleByClass(LPCSTR class_name) {
-    HWND wHandle = FindWindowA(class_name, nullptr);
-    return wHandle;
+    HWND window_handle = FindWindowA(class_name, nullptr);
+    return window_handle;
 }
 
 // --- PROCESS ID ---
-DWORD GetProcessIdFromWindowHandle(HWND wHandle) {
-    DWORD pid;
-    GetWindowThreadProcessId(wHandle, &pid); // get the process id using window handle
-    return pid;
+DWORD GetProcessIdFromWindowHandle(HWND window_handle) {
+    DWORD process_id;
+    GetWindowThreadProcessId(window_handle, &process_id); // get the process id using window handle
+    return process_id;
 }
 
 DWORD GetProcessIdByTitle(LPCSTR window_title) {
@@ -27,12 +27,17 @@ DWORD GetProcessIdByClass(LPCSTR class_name) {
 }
 
 // --- PROCESS HANDLE ---
+
+HANDLE GetProcessHandleByProcessId(DWORD process_id, DWORD desired_access) {
+    return OpenProcess(desired_access, FALSE, process_id);
+}
+
 HANDLE GetProcessHandleByTitle(LPCSTR window_title, DWORD desired_access) {
-    return OpenProcess(desired_access, FALSE, GetProcessIdByTitle(window_title));
+    return GetProcessHandleByProcessId(GetProcessIdByTitle(window_title), desired_access);
 }
 
 HANDLE GetProcessHandleByClass(LPCSTR class_name, DWORD desired_access) {
-    return OpenProcess(desired_access, FALSE, GetProcessIdByClass(class_name));
+    return GetProcessHandleByProcessId(GetProcessIdByClass(class_name), desired_access);
 }
 
 // BASE ADDRESS
