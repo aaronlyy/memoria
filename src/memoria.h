@@ -48,8 +48,8 @@ void WriteDouble(HANDLE pHandle, LPVOID address, double value);
 void WriteFloat(HANDLE pHandle, LPVOID address, float value);
 
 // --- MATH ---
-double calculateDistance(float x1, float y1, float x2, float y2);
-double calculateYawToPosition(float x1, float y1, float x2, float y2);
-double calculatePitchToPosition(float x1, float y1, float z1, float x2, float y2, float z2);
+double CalculateDistance(float x1, float y1, float x2, float y2);
+double CalculateYawToPosition(float x1, float y1, float x2, float y2);
+double CalculatePitchToPosition(float x1, float y1, float z1, float x2, float y2, float z2);
 
 #endif //MEMORIA_MEMORIA_H

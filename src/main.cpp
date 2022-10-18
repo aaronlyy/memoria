@@ -81,8 +81,8 @@ int main() {
         }
 
         if (GetAsyncKeyState(VK_NUMPAD2)) {
-            double new_pitch = calculatePitchToPosition(x, y, z, saved_x, saved_y, saved_z);
-            double new_yaw = calculateYawToPosition(x, y, saved_x, saved_y);
+            double new_pitch = CalculatePitchToPosition(x, y, z, saved_x, saved_y, saved_z);
+            double new_yaw = CalculateYawToPosition(x, y, saved_x, saved_y);
             WriteFloat(pHandle, (LPVOID)add_pitch, (float)new_pitch);
             WriteFloat(pHandle, (LPVOID)add_yaw, (float)new_yaw );
         }

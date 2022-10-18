@@ -104,14 +104,14 @@ void WriteFloat(HANDLE pHandle, LPVOID address, float value) {
 }
 
 // --- MATH ---
-double calculateDistance(float x1, float y1, float x2, float y2) {
-    return sqrt(pow(x2 - x1, 2) + pow(y1 - y2, 2));
+double CalculateDistance(float x1, float y1, float x2, float y2) {
+    return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
 }
 
-double calculateYawToPosition(float x1, float y1, float x2, float y2) {
+double CalculateYawToPosition(float x1, float y1, float x2, float y2) {
     return atan2(y2 - y1, x2 - x1) * 180 / M_PI + 90;
 }
 
-double calculatePitchToPosition(float x1, float y1, float z1, float x2, float y2, float z2) {
-    return atan2(z2 - z1, calculateDistance(x1, y1, x2, y2)) * 180 / M_PI;
+double CalculatePitchToPosition(float x1, float y1, float z1, float x2, float y2, float z2) {
+    return atan2(z2 - z1, CalculateDistance(x1, y1, x2, y2)) * 180 / M_PI;
 }
