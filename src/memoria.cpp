@@ -72,6 +72,9 @@ uintptr_t GetModuleBaseAddress(TCHAR* modName, DWORD processId) {
 }
 
 // --- READ ---
+
+
+
 int ReadInt(HANDLE pHandle, LPCVOID address) {
     int buffer;
     ReadProcessMemory(pHandle, address, &buffer, sizeof(int), nullptr);

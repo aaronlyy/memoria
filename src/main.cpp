@@ -92,3 +92,18 @@ int main() {
         }
     }
 }
+
+/*
+ * Find the entity list
+ * 1. Start Bot TDM with "idlebots 1"
+ * 2. Search for 100 int
+ * 3. Shoot at enemy
+ * 4. Search for decreased value
+ * 5. Repeat 3 & 4 until enemy health adress found
+ * 6. Pointerscan this address (set ending Offset to EC)
+ * 7. Restart Assault Cube
+ * 8. Search for value 100 in Pointerscan
+ * 9. Move Pointers down with the least amount of offsets
+ * 10. Dissect Data/Structures for these pointers
+ * 11. Done.
+ * */
