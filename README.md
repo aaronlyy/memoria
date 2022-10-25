@@ -44,6 +44,8 @@ This Project is work in progress and in a very early stage of development.
 - GetModuleBaseAddressByProcessId
 - GetModuleBaseAddressByName
 - GetModuleBaseAddressByClass
+- Overload functions to take std::string
+- Overload Read and Write functions to take a reference
 
 ## About
 
