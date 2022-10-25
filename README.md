@@ -21,18 +21,20 @@ This Project is work in progress and in a very early stage of development.
 - BASE ADRESS
   - uintptr_t GetModuleBaseAddress(TCHAR* modName, DWORD procId);
 - READ
-  - int ReadInt(HANDLE pHandle, LPCVOID address);
-  - double ReadDouble(HANDLE pHandle, LPCVOID address);
-  - float ReadFloat(HANDLE pHandle, LPCVOID address);
+  - int ReadInt(HANDLE pHandle, uintptr_t address);
+  - double ReadDouble(HANDLE pHandle, uintptr_t address);
+  - float ReadFloat(HANDLE pHandle, uintptr_t address);
 - WRITE
-  - void WriteInt(HANDLE pHandle, LPVOID address, int value);
-  - void WriteDouble(HANDLE pHandle, LPVOID address, double value);
-  - void WriteFloat(HANDLE pHandle, LPVOID address, float value);
+  - void WriteInt(HANDLE pHandle, uintptr_t address, int value);
+  - void WriteDouble(HANDLE pHandle, uintptr_t address, double value);
+  - void WriteFloat(HANDLE pHandle, uintptr_t address, float value);
 - MATH
-  - double CalculateDistance(float x1, float y1, float x2, float y2);
-  - double CalculateYawToPosition(float x1, float y1, float x2, float y2);
-  - double CalculatePitchToPosition(float x1, float y1, float z1, float x2, float y2, float z2);
-
+  - double CalculateDistance(double x1, double y1, double x2, double y2);
+  - double CalculateYawToPosition(double x1, double y1, double x2, double y2);
+  - double CalculatePitchToPosition(double x1, double y1, double z1, double x2, double y2, double z2);
+- UTIL
+  - LPCVOID AddressToPointerC(uintptr_t address);
+  - LPVOID AddressToPointer(uintptr_t address);
 ## Showcase
 
 [![yaw & pitch calculation test](https://img.youtube.com/vi/YhmHOjOGIBI/0.jpg)](https://www.youtube.com/watch?v=YhmHOjOGIBI)

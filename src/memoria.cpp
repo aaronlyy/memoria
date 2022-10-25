@@ -73,48 +73,55 @@ uintptr_t GetModuleBaseAddress(TCHAR* modName, DWORD processId) {
 
 // --- READ ---
 
-
-
-int ReadInt(HANDLE pHandle, LPCVOID address) {
+int ReadInt(HANDLE pHandle, uintptr_t address) {
     int buffer;
-    ReadProcessMemory(pHandle, address, &buffer, sizeof(int), nullptr);
+    ReadProcessMemory(pHandle, (LPCVOID)address, &buffer, sizeof(int), nullptr);
     return buffer;
 }
 
-double ReadDouble(HANDLE pHandle, LPCVOID address) {
+double ReadDouble(HANDLE pHandle, uintptr_t address) {
     double buffer;
-    ReadProcessMemory(pHandle, address, &buffer, sizeof(double), nullptr);
+    ReadProcessMemory(pHandle, (LPCVOID)address, &buffer, sizeof(double), nullptr);
     return buffer;
 }
 
-float ReadFloat(HANDLE pHandle, LPCVOID address) {
+float ReadFloat(HANDLE pHandle, uintptr_t address) {
     float buffer;
-    ReadProcessMemory(pHandle, address, &buffer, sizeof(float), nullptr);
+    ReadProcessMemory(pHandle, (LPCVOID)address, &buffer, sizeof(float), nullptr);
     return buffer;
 }
 
 // --- WRITE ---
-void WriteInt(HANDLE pHandle, LPVOID address, int value) {
-    WriteProcessMemory(pHandle, address, &value, sizeof(int), nullptr);
+void WriteInt(HANDLE pHandle, uintptr_t address, int value) {
+    WriteProcessMemory(pHandle, (LPVOID)address, &value, sizeof(int), nullptr);
 }
 
-void WriteDouble(HANDLE pHandle, LPVOID address, double value) {
-    WriteProcessMemory(pHandle, address, &value, sizeof(double), nullptr);
+void WriteDouble(HANDLE pHandle, uintptr_t address, double value) {
+    WriteProcessMemory(pHandle, (LPVOID)address, &value, sizeof(double), nullptr);
 }
 
-void WriteFloat(HANDLE pHandle, LPVOID address, float value) {
-    WriteProcessMemory(pHandle, address, &value, sizeof(float), nullptr);
+void WriteFloat(HANDLE pHandle, uintptr_t address, float value) {
+    WriteProcessMemory(pHandle, (LPVOID)address, &value, sizeof(float), nullptr);
 }
 
 // --- MATH ---
-double CalculateDistance(float x1, float y1, float x2, float y2) {
+double CalculateDistance(double x1, double y1, double x2, double y2) {
     return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
 }
 
-double CalculateYawToPosition(float x1, float y1, float x2, float y2) {
+double CalculateYawToPosition(double x1, double y1, double x2, double y2) {
     return atan2(y2 - y1, x2 - x1) * 180 / M_PI + 90;
 }
 
-double CalculatePitchToPosition(float x1, float y1, float z1, float x2, float y2, float z2) {
+double CalculatePitchToPosition(double x1, double y1, double z1, double x2, double y2, double z2) {
     return atan2(z2 - z1, CalculateDistance(x1, y1, x2, y2)) * 180 / M_PI;
+}
+
+// --- UTIL ---
+LPCVOID AddressToPointerC(uintptr_t address) {
+    return (LPCVOID)address;
+}
+
+LPVOID AddressToPointer(uintptr_t address) {
+    return (LPVOID)address;
 }

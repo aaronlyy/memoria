@@ -5,12 +5,13 @@
 
 
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include "memoria.h"
 
 
 int main() {
 
+    // define all offsets
     uintptr_t off_health = 0xEC;
     uintptr_t off_x = 0x04;
     uintptr_t off_y = 0x08;
@@ -29,7 +30,7 @@ int main() {
 
     // add playerent offset to base and read value at address
     uintptr_t add_playerent = ac_client + 0x18AC00;
-    uintptr_t playerent = ReadInt(pHandle, (LPCVOID)add_playerent);
+    uintptr_t playerent = ReadInt(pHandle, add_playerent);
 
     // calculate all addresses
     uintptr_t add_yaw = playerent + off_yaw;
@@ -61,13 +62,13 @@ int main() {
 
     while (true) {
 
-        health = ReadInt(pHandle, (LPCVOID)add_health);
-        x = ReadFloat(pHandle, (LPCVOID)add_x);
-        y = ReadFloat(pHandle, (LPCVOID)add_y);
-        z = ReadFloat(pHandle, (LPCVOID)add_z);
+        health = ReadInt(pHandle, add_health);
+        x = ReadFloat(pHandle, add_x);
+        y = ReadFloat(pHandle, add_y);
+        z = ReadFloat(pHandle, add_z);
 
         if (GetAsyncKeyState(VK_NUMPAD0)) {
-            WriteInt(pHandle, (LPVOID)add_health, 100);
+            WriteInt(pHandle, add_health, 100);
         }
 
         if (GetAsyncKeyState(VK_NUMPAD9)) {
@@ -83,12 +84,12 @@ int main() {
         if (GetAsyncKeyState(VK_NUMPAD2)) {
             double new_pitch = CalculatePitchToPosition(x, y, z, saved_x, saved_y, saved_z);
             double new_yaw = CalculateYawToPosition(x, y, saved_x, saved_y);
-            WriteFloat(pHandle, (LPVOID)add_pitch, (float)new_pitch);
-            WriteFloat(pHandle, (LPVOID)add_yaw, (float)new_yaw );
+            WriteFloat(pHandle, add_pitch, (float)new_pitch);
+            WriteFloat(pHandle, add_yaw, (float)new_yaw);
         }
 
         if (health < 50) {
-            WriteInt(pHandle, (LPVOID)add_health, 100);
+            WriteInt(pHandle, add_health, 100);
         }
     }
 }
