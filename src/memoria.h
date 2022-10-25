@@ -32,15 +32,59 @@ HWND GetWindowHandleByClass(LPCSTR class_name);
  * @return DWORD process_id
  */
 DWORD GetProcessIdFromWindowHandle(HWND window_handle);
+
+/**
+ * Get the process ID of a process by its window title
+ *
+ * @param LPCSTR window_title
+ * @return DWORD process_id
+ */
 DWORD GetProcessIdByTitle(LPCSTR window_title);
+
+/**
+ * Get the process ID of a process by its class name
+ *
+ * @param LPCSTR class name
+ * @return DWORD process_id
+ */
 DWORD GetProcessIdByClass(LPCSTR class_name);
 
 // --- PROCESS HANDLE ---
+/**
+ * Get the process handle of a process by its process id
+ *
+ * @param DWORD process_id
+ * @param DWORD desired_access
+ * @return HANDLE process_handle
+ */
 HANDLE GetProcessHandleByProcessId(DWORD process_id, DWORD desired_access);
+
+/**
+ * Get the process handle of a process by its window_title
+ *
+ * @param LPCSTR window_title
+ * @param DWORD desired_access
+ * @return HANDLE process_handle
+ */
 HANDLE GetProcessHandleByTitle(LPCSTR window_title, DWORD desired_access);
+
+/**
+ * Get the process handle of a process by its class name
+ *
+ * @param LPCSTR class_name
+ * @param DWORD desired_access
+ * @return HANDLE process_handle
+ */
 HANDLE GetProcessHandleByClass(LPCSTR class_name, DWORD desired_access);
 
 // BASE ADDRESS
+/**
+ * Get the base adress of a specific module
+ *
+ * @param TCHAR* modName
+ * @param DWORD procId
+ * @return uintptr_t base_address
+ */
 uintptr_t GetModuleBaseAddress(TCHAR* modName, DWORD procId);
 
 // --- READ ---
