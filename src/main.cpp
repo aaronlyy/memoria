@@ -3,42 +3,34 @@
  * Last offset update: 17.10.2022
  */
 
-
 #include <iostream>
 #include <cmath>
+#include "offsets.h"
 #include "memoria.h"
 
+using namespace memoria;
 
 int main() {
-
-    // define all offsets
-    uintptr_t off_health = 0xEC;
-    uintptr_t off_x = 0x04;
-    uintptr_t off_y = 0x08;
-    uintptr_t off_z = 0x0C;
-    uintptr_t off_yaw = 0x34;
-    uintptr_t off_pitch = 0x38;
-    uintptr_t off_current_height = 0x50;
-    uintptr_t off_height = 0x054;
-    uintptr_t off_direction = 0x80;
-    uintptr_t off_shots = 0x188;
+    HANDLE pHandle = nullptr;
+    while (pHandle == nullptr) {
+        pHandle = GetProcessHandleByClass("SDL_app", PROCESS_ALL_ACCESS);
+    }
 
     // get base address
     char module_name[] = "client.dll"; // ac_client.exe also works?
     uintptr_t ac_client = GetModuleBaseAddress(_T(module_name), GetProcessIdByClass("SDL_app"));
-    HANDLE pHandle = GetProcessHandleByClass("SDL_app", PROCESS_ALL_ACCESS);
 
     // add playerent offset to base and read value at address
     uintptr_t add_playerent = ac_client + 0x18AC00;
     uintptr_t playerent = ReadInt(pHandle, add_playerent);
 
     // calculate all addresses
-    uintptr_t add_yaw = playerent + off_yaw;
-    uintptr_t add_pitch = playerent + off_pitch;
-    uintptr_t add_health = playerent + off_health;
-    uintptr_t add_x = playerent + off_x;
-    uintptr_t add_y = playerent + off_y;
-    uintptr_t add_z = playerent + off_z;
+    uintptr_t add_yaw = playerent + offsets::yaw;
+    uintptr_t add_pitch = playerent + offsets::pitch;
+    uintptr_t add_health = playerent + offsets::health;
+    uintptr_t add_x = playerent + offsets::x;
+    uintptr_t add_y = playerent + offsets::y;
+    uintptr_t add_z = playerent + offsets::z;
 
     int health;
     float x, y, z;

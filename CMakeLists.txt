@@ -3,4 +3,4 @@ project(memoria)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(memoria src/main.cpp src/memoria.h src/memoria.cpp)
+add_executable(memoria src/main.cpp src/memoria.h src/memoria.cpp src/offsets.h)
